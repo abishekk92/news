@@ -21,7 +21,8 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 			if(localStorage && localStorage.getItem('keyword')){
-			    data= JSON.parse(localStorage.getItem('items'));
+			data= JSON.parse(localStorage.getItem('items'));
+			    $('input#keyword-search').attr('placeholder',localStorage.getItem('keyword'));
 			    $.each(data,function(index,element){
 				    $('div#items').append('<p><a href="'+element.link+'">'+element.title+'</a></p></br>');			
 				    });
