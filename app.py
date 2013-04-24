@@ -1,4 +1,5 @@
-from flask import Flask,render_template,request,url_for
+from flask import Flask,render_template,request,Response
+import json
 from parser import parse
 app=Flask(__name__)
 
@@ -10,7 +11,7 @@ def index():
 def query():
 	keyword=request.args.get('keyword')
 	response=parse(keyword)
-	return render_template('results.html',keyword=keyword,results=response)
+	return Response(json.dumps(response),mimetype='application/json')
 
 
 if __name__ == '__main__':
