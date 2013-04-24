@@ -23,7 +23,7 @@
 			if(localStorage && localStorage.getItem('keyword')){
 			    data= JSON.parse(localStorage.getItem('items'));
 			    $.each(data,function(index,element){
-				    $('div#items').append('<div class=""><p><a href="'+element.link+'">'+element.title+'</a></p></div></br>');			
+				    $('div#items').append('<p><a href="'+element.link+'">'+element.title+'</a></p></br>');			
 				    });
 			    update_search_bar();
 
@@ -41,7 +41,7 @@ function search(){
 	$.getJSON($SCRIPT_ROOT+'/query',{keyword: $('input#keyword-search').val()},function(data){
 			$('div#items').empty();
 			$.each(data,function(index,element){
-				$('div#items').append('<div class=""><p><a href="'+element.link+'">'+element.title+'</a></p></div></br>');			
+				$('div#items').append('<p><a href="'+element.link+'">'+element.title+'</a></p></br>');			
 				});
 				update_search_bar();
 				localStorage.setItem('keyword',$('input#keyword-search').val());
