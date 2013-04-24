@@ -1,0 +1,9 @@
+input#keyword-search
+{
+  position: relative;
+  top : 400px;
+  height : 60px;
+  font-size: 20px;
+  text-align: center;
+}
+
