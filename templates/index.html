@@ -3,33 +3,13 @@
 	<head>
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 		<link href="static/main.css" rel="stylesheet">
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script type=text/javascript>
-  			$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-		</script>
-
 	</head>
 	<body>
 		<div class="container">
-					<input class="input-block-level" type="text" placeholder="I want to search for" id="keyword-search"/>
+			<form id="keyword" action="/query">
+				<input class="input-block-level" type="text" placeholder="I want to search for" id="keyword-search" name="keyword"/>
+				<input type= "submit" style="display:none"/>
+			</form>
 	</div>
 </body>
-<script type="text/javascript">
-	$(document).keypress(function(e){
-			if(e.which == 13) {
-			search();
-			 }
-			 });
-function search(){
-	$.getJSON($SCRIPT_ROOT+'/query',{keyword: $('input#keyword-search').val()},function(data){
-			$.each(data,function(index,element){
-				$('input#keyword-search').css('display','none');
-				result='<a href='+element.link+'>'+element.title+'</a>';
-				$(result).appendTo('body');
-							
-				});
-			});
-
-}
-</script>
 </html>
