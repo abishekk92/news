@@ -11,10 +11,27 @@
 	</head>
 	<body>
 		<div class="container">
-					<input class="input-block-level" type="text" placeholder="I want to search for" id="keyword-search"/>
-	</div>
+			<input class="input-block-level" type="text" placeholder="I want to search for" id="keyword-search" style="display:none"/>
+			<div class="row">
+				<div id="items">
+				</div>
+			</div>
+		</div>
 </body>
 <script type="text/javascript">
+	$(document).ready(function(){
+			if(localStorage && localStorage.getItem('keyword')){
+			    data= JSON.parse(localStorage.getItem('items'));
+			    $.each(data,function(index,element){
+				    $('div#items').append('<div class=""><p><a href="'+element.link+'">'+element.title+'</a></p></div></br>');			
+				    });
+			    update_search_bar();
+
+			    }
+			    else{
+			    $('input#keyword-search').css('display','block');
+			 }
+			});
 	$(document).keypress(function(e){
 			if(e.which == 13) {
 			search();
@@ -22,14 +39,22 @@
 			 });
 function search(){
 	$.getJSON($SCRIPT_ROOT+'/query',{keyword: $('input#keyword-search').val()},function(data){
+			$('div#items').empty();
 			$.each(data,function(index,element){
-				$('input#keyword-search').css('display','none');
-				result='<a href='+element.link+'>'+element.title+'</a>';
-				$(result).appendTo('body');
-							
+				$('div#items').append('<div class=""><p><a href="'+element.link+'">'+element.title+'</a></p></div></br>');			
 				});
+				update_search_bar();
+				localStorage.setItem('keyword',$('input#keyword-search').val());
+				localStorage.setItem('items',JSON.stringify(data));
 			});
+			
 
+
+
+}
+function update_search_bar(){
+		$('input#keyword-search').css('display','block');
+		$('input#keyword-search').css('top','100px');
 }
 </script>
 </html>

@@ -7,3 +7,17 @@ input#keyword-search
   text-align: center;
 }
 
+p
+{
+  width: 250px;
+  margin: 20px;
+  float: left;
+  font-size: 20px;
+
+}
+
+div#items
+{
+ position: relative;
+ top: 200px;
+}
